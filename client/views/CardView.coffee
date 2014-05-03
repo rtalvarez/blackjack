@@ -2,10 +2,9 @@ class window.CardView extends Backbone.View
 
   className: 'card'
 
-  # template: _.template '<%= rankName %> of <%= suitName %>'
-  template: (arr) =>
-    rankName = arr['rankName']
-    suitName = arr['suitName']
+  template: (obj) =>
+    rankName = obj['rankName']
+    suitName = obj['suitName']
 
     if not @model.get 'revealed'
       _.template '<img src="img/card-back.png"></img>'

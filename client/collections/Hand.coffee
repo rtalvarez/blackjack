@@ -24,6 +24,15 @@ class window.Hand extends Backbone.Collection
     , 0
     if hasAce then [score, score + 10] else [score]
 
+  adjustedScore: ->
+    scores = @scores()
+    if scores.length is 1
+      scores[0]
+    else if scores[1] > 21
+      scores[0]
+    else
+      Math.max(scores[0], scores[1])
+
   dealerPlay: ->
     if not @.at(0).get 'revealed' then @.at(0).flip()
 

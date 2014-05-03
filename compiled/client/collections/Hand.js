@@ -43,6 +43,18 @@
       }
     };
 
+    Hand.prototype.adjustedScore = function() {
+      var scores;
+      scores = this.scores();
+      if (scores.length === 1) {
+        return scores[0];
+      } else if (scores[1] > 21) {
+        return scores[0];
+      } else {
+        return Math.max(scores[0], scores[1]);
+      }
+    };
+
     Hand.prototype.dealerPlay = function() {
       var score;
       if (!this.at(0).get('revealed')) {

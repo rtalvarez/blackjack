@@ -14,10 +14,10 @@
 
     CardView.prototype.className = 'card';
 
-    CardView.prototype.template = function(arr) {
+    CardView.prototype.template = function(obj) {
       var rankName, suitName;
-      rankName = arr['rankName'];
-      suitName = arr['suitName'];
+      rankName = obj['rankName'];
+      suitName = obj['suitName'];
       if (!this.model.get('revealed')) {
         return _.template('<img src="img/card-back.png"></img>');
       } else {
