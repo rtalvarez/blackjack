@@ -10,7 +10,7 @@
       return AppView.__super__.constructor.apply(this, arguments);
     }
 
-    AppView.prototype.template = _.template('<button class="hit-button active">Hit</button> <button class="stand-button active">Stand</button> <button class="hidden gameOver">Play again?</button> <div class="player-hand-container"></div> <div class="dealer-hand-container"></div>');
+    AppView.prototype.template = _.template('<button class="hit-button active">Hit</button> <button class="stand-button active">Stand</button> <button class="replay-button hidden gameOver">Play again?</button> <div class="player-hand-container"></div> <div class="dealer-hand-container"></div>');
 
     AppView.prototype.events = {
       "click .hit-button": function() {
@@ -18,13 +18,16 @@
       },
       "click .stand-button": function() {
         return this.model.get('playerHand').stand();
+      },
+      "click .replay-button": function() {
+        this.model.initialize();
+        return this.render();
       }
     };
 
     AppView.prototype.initialize = function() {
       this.render();
       return this.model.on('change:endGameState', function() {
-        console.log('no');
         $('.active').toggleClass('hidden');
         return $('.gameOver').toggleClass('hidden');
       }, this);
