@@ -9,9 +9,8 @@ class window.Hand extends Backbone.Collection
     if @scores()[0] > 21 then @trigger 'endGame', @
 
 
-  ###
-  stand
-  ###
+  stand: ->
+    @trigger 'dealerTurn', @
 
   scores: ->
     # The scores are an array of potential scores.
@@ -24,3 +23,20 @@ class window.Hand extends Backbone.Collection
       score + if card.get 'revealed' then card.get 'value' else 0
     , 0
     if hasAce then [score, score + 10] else [score]
+
+  dealerPlay: ->
+
+    if not @.at(0).get 'revealed' then @.at(0).flip()
+
+    score = @scores()
+
+    if score.length is 2 and score[1] <= 21 then score = score[1]
+    else score = score[0]
+
+    if score < 17
+      @hit()
+      do @dealerPlay
+    else @trigger 'endGame', @
+
+
+

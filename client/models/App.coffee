@@ -9,6 +9,9 @@ class window.App extends Backbone.Model
     @.get('playerHand').on 'endGame', ->
       @set 'endGameState', true
     , @
+    @.get('playerHand').on 'dealerTurn', ->
+      @.get('dealerHand').dealerPlay()
+    , @
 
 
 

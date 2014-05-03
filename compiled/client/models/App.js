@@ -16,8 +16,11 @@
       this.set('playerHand', deck.dealPlayer());
       this.set('dealerHand', deck.dealDealer());
       this.set('endGameState', false);
-      return this.get('playerHand').on('endGame', function() {
+      this.get('playerHand').on('endGame', function() {
         return this.set('endGameState', true);
+      }, this);
+      return this.get('playerHand').on('dealerTurn', function() {
+        return this.get('dealerHand').dealerPlay();
       }, this);
     };
 

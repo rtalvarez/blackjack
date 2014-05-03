@@ -24,10 +24,9 @@
       }
     };
 
-
-    /*
-    stand
-     */
+    Hand.prototype.stand = function() {
+      return this.trigger('dealerTurn', this);
+    };
 
     Hand.prototype.scores = function() {
       var hasAce, score;
@@ -41,6 +40,25 @@
         return [score, score + 10];
       } else {
         return [score];
+      }
+    };
+
+    Hand.prototype.dealerPlay = function() {
+      var score;
+      if (!this.at(0).get('revealed')) {
+        this.at(0).flip();
+      }
+      score = this.scores();
+      if (score.length === 2 && score[1] <= 21) {
+        score = score[1];
+      } else {
+        score = score[0];
+      }
+      if (score < 17) {
+        this.hit();
+        return this.dealerPlay();
+      } else {
+        return this.trigger('endGame', this);
       }
     };
 
