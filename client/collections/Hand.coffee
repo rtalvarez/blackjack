@@ -25,7 +25,6 @@ class window.Hand extends Backbone.Collection
     if hasAce then [score, score + 10] else [score]
 
   dealerPlay: ->
-
     if not @.at(0).get 'revealed' then @.at(0).flip()
 
     score = @scores()

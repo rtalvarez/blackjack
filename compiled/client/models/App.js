@@ -19,6 +19,9 @@
       this.get('playerHand').on('endGame', function() {
         return this.set('endGameState', true);
       }, this);
+      this.get('dealerHand').on('endGame', function() {
+        return this.set('endGameState', true);
+      }, this);
       return this.get('playerHand').on('dealerTurn', function() {
         return this.get('dealerHand').dealerPlay();
       }, this);
