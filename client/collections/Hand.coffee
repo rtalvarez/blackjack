@@ -6,6 +6,12 @@ class window.Hand extends Backbone.Collection
 
   hit: ->
     @add(@deck.pop()).last()
+    if @scores()[0] > 21 then @trigger 'endGame', @
+
+
+  ###
+  stand
+  ###
 
   scores: ->
     # The scores are an array of potential scores.
